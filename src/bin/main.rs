@@ -13,10 +13,9 @@ use esp_hal::timer::timg::TimerGroup;
 use esp_hal::gpio::{Output, OutputConfig};
 use esp_hal::gpio::Level;
 
-//use dshot::{DShot, DShotSpeed};
+use esp_println::println;
 
 use dshot::{DShot, DShotSpeed};
-
 
 
 #[panic_handler]
@@ -55,8 +54,8 @@ async fn main(spawner: Spawner) -> ! {
     let mut esc = DShot::new(channel, DShotSpeed::DShot600, None, None);
 
     match esc.arm().await {
-        Ok(_) => esp_println::println!("arm oldu"),
-        Err(e) => esp_println::println!("arm olmadı: {}", e),
+        Ok(_) => println!("arm oldu"),
+        Err(e) => println!("arm olmadı: {}", e),
     }
 
     let mut throttle = 0u16;
